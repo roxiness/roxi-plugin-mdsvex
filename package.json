@@ -1,0 +1,13 @@
+{
+  "name": "@roxi/plugin-mdsvex",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jakobrosenberg@gmail.com",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "mdsvex": "^0.8.2"
+  }
+}
