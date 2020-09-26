@@ -4,27 +4,29 @@ const extension = ['.md', '.svx']
 export default {
   hooks: [
     {
-      condition: 'start',
-      action: (ctx, params) => ({ config: { mdsvex: {} } }), //provide an mdsvex object for the developer to modify
+      event: 'start',
+      action: (app, params) => app.config.mdsvex = {}, //provide an mdsvex object for the developer to modify
     },
     {
-      condition: 'afterUserConfig',
-      action: (ctx, params) => ({
-        config: {
-          svelte: {
-            preprocess: [
-              mdsvex({
-                extension: ['md', 'svx'],
-                // extension: params.extension || ctx.config.mdsvex.extension || extension,
-                ...ctx.config.mdsvex,
-                ...params
-              })
-            ],
-            extensions: ['.md', '.svx', '.svelte']
-            // extensions: params.extension || ctx.config.mdsvex.extension || extension
+      event: 'before:bundle',
+      action: (app, params) => {
+        app.merge({
+          config: {
+            svelte: {
+              preprocess: [
+                mdsvex({
+                  extension: ['md', 'svx'],
+                  // extension: params.extension || app.config.mdsvex.extension || extension,
+                  ...app.config.mdsvex,
+                  ...params
+                })
+              ],
+              extensions: ['.md', '.svx', '.svelte']
+              // extensions: params.extension || app.config.mdsvex.extension || extension
+            }
           }
-        }
-      })
+        })
+      }
     }
   ]
 }
