@@ -1,7 +1,9 @@
 import { mdsvex } from 'mdsvex'
-const extension = ['.md', '.svx']
+const extension = ['.md', '.svx', '.svelte']
 
-export default {
+/** @type {import('roxi')['RoxiPlugin']} */
+module.exports.default = {
+  name: 'mdsvex',
   hooks: [
     {
       event: 'start',
@@ -15,14 +17,14 @@ export default {
             svelte: {
               preprocess: [
                 mdsvex({
-                  extension: ['md', 'svx'],
-                  // extension: params.extension || app.config.mdsvex.extension || extension,
                   ...app.config.mdsvex,
                   ...params
                 })
               ],
-              extensions: ['.md', '.svx', '.svelte']
-              // extensions: params.extension || app.config.mdsvex.extension || extension
+              extensions: params.extension
+                || app.config.svelte.extensions
+                || app.config.mdsvex.extension
+                || extension
             }
           }
         })

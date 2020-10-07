@@ -8,6 +8,7 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
-    "mdsvex": "^0.8.2"
+    "mdsvex": "^0.8.8",
+    "roxi": "^1.3.0"
   }
 }
